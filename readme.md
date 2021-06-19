@@ -1,6 +1,8 @@
 # Three.js Terrain
 
-Treeh.js starter Courtesy of Bruno Simon of https://threejs-journey.xyz/
+Three.js starter project Courtesy of Bruno Simon of https://threejs-journey.xyz/
+
+![terrain_animation](https://user-images.githubusercontent.com/4311684/122646675-48754f80-d118-11eb-98c4-f7773c458ddd.gif)
 
 ## Setup
 
