@@ -62,13 +62,13 @@ lightFolder.addColor(col, 'color').onChange(() => {
  * Sizes
  */
 const sizes = {
-  width: window.innerWidth,
+  width: window.innerWidth * (window.innerWidth <= 600 ? 1 : 0.7),
   height: window.innerHeight,
 }
 
 window.addEventListener('resize', () => {
   // Update sizes
-  sizes.width = window.innerWidth
+  sizes.width = window.innerWidth * (window.innerWidth <= 600 ? 1 : 0.7)
   sizes.height = window.innerHeight
 
   // Update camera
@@ -104,6 +104,7 @@ scene.add(camera)
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  alpha: true,
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -111,6 +112,11 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 /**
  * Animate
  */
+let mouseY = 0
+const animateTerrain = (evt) => {
+  mouseY = evt.clientY
+}
+document.addEventListener('mousemove', animateTerrain)
 
 const clock = new THREE.Clock()
 
@@ -118,11 +124,7 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime()
 
   // Update objects
-  //   sphere.rotation.y = 0.5 * elapsedTime
-
-  // Update Orbital Controls
-  // controls.update()
-
+  plane.material.displacementScale = 0.3 + mouseY * 0.0008
   plane.rotation.z = 0.5 * elapsedTime
 
   // Render

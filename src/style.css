@@ -1,20 +1,36 @@
-*
-{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 html,
-body
-{
-    height: 100vh;
-    font-family: 'Poppins';
+body {
+  height: 100vh;
+  font-family: Arial, Helvetica, Arial, sans-serif;
+  background-color: rgb(27, 27, 31);
 }
 
-.webgl
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+.webgl {
+  position: fixed;
+  top: 0;
+  right: 0;
+  outline: none;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  color: white;
+  margin: 16em 8em;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+p {
+  font-size: 1.5rem;
+  color: rgb(107, 107, 122);
 }
