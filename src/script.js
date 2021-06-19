@@ -61,14 +61,15 @@ lightFolder.addColor(col, 'color').onChange(() => {
 /**
  * Sizes
  */
+const MAX_WIDTH = 700
 const sizes = {
-  width: window.innerWidth * (window.innerWidth <= 600 ? 1 : 0.7),
+  width: window.innerWidth * (window.innerWidth <= MAX_WIDTH ? 1 : 0.7),
   height: window.innerHeight,
 }
 
 window.addEventListener('resize', () => {
   // Update sizes
-  sizes.width = window.innerWidth * (window.innerWidth <= 600 ? 1 : 0.7)
+  sizes.width = window.innerWidth * (window.innerWidth <= MAX_WIDTH ? 1 : 0.7)
   sizes.height = window.innerHeight
 
   // Update camera
