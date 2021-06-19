@@ -5,12 +5,14 @@ import * as dat from 'dat.gui'
 
 // Texture loader
 const loader = new THREE.TextureLoader()
-const height = loader.load('height2.png')
+const height = loader.load('height.png')
 const texture = loader.load('/texture.jpg')
 const alpha = loader.load('/alpha.png')
 
 // Debug
 const gui = new dat.GUI({ width: 300 })
+const lightFolder = gui.addFolder('Light')
+const planeFolder = gui.addFolder('Plane')
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -25,6 +27,10 @@ const materials = new THREE.MeshStandardMaterial({
   color: 'grey',
   map: texture,
   displacementMap: height,
+  displacementScale: 0.6,
+  alphaMap: alpha,
+  transparent: true,
+  depthTest: false,
 })
 // Mesh
 const plane = new THREE.Mesh(geometry, materials)
@@ -32,22 +38,23 @@ plane.rotation.x = 181
 
 scene.add(plane)
 
-gui.add(plane.rotation, 'x').min(0).max(200).name('Plane Rotation X')
+planeFolder.add(plane.rotation, 'x').min(0).max(200).name('Rotation x')
 
 // Lights
-const pointLight = new THREE.PointLight('#00b3ff', 2)
-pointLight.position.x = 2
-pointLight.position.y = 3
-pointLight.position.z = 4
+const pointLight = new THREE.PointLight('#00b3ff', 3)
+pointLight.position.x = 0.2
+pointLight.position.y = 10
+pointLight.position.z = 4.4
 
 scene.add(pointLight)
 
-gui.add(pointLight.position, 'x').min(0).max(100).name('PointLight X')
-gui.add(pointLight.position, 'y').min(0).max(100).name('PointLight Y')
-gui.add(pointLight.position, 'z').min(0).max(100).name('PointLight Z')
+lightFolder.add(pointLight, 'intensity').min(0).max(100).step(0.1)
+lightFolder.add(pointLight.position, 'x').min(0).max(100).step(0.1)
+lightFolder.add(pointLight.position, 'y').min(0).max(100).step(0.1)
+lightFolder.add(pointLight.position, 'z').min(0).max(100).step(0.1)
 
 const col = { color: '#00b3ff' }
-gui.addColor(col, 'color').onChange(() => {
+lightFolder.addColor(col, 'color').onChange(() => {
   pointLight.color.set(col.color)
 })
 
